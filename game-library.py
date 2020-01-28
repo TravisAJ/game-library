@@ -10,7 +10,16 @@ def addedit():
     print("running addedit()...")
     
 def printall():
-    print("running printall()...")
+    #print("running printall()...")
+    key_list = games.keys()
+    
+    for key in key_list:
+        game = games[key]
+        print()
+        print("--------------------------------")
+        print("Title: ", game[1])
+        print("Developer: ", game[2])
+        print("--------------------------------")    
 
 def search():
     print("running search()...")
@@ -19,7 +28,16 @@ def remove():
     print("running remove()...")
     
 def save():
-    print("running save()...")
+    #print("running save()...")
+    datafile = open("datafile.pickle", "wb")
+    pickle.dump(games, datafile)
+    datafile.close()
+    print("\nFile Saved.")
+
+games = {}
+datafile = open("game_lib.pickle", "rb")
+games = pickle.load(datafile)
+datafile.close()
 
 keep_going = True
 quit = True
@@ -29,7 +47,7 @@ while keep_going:
     Welcome to the Game Library
     ---------------------------
     
-    MAIN MENU
+    MAIN MENU\n
     1) Add/Edit Game
     2) Print All Games
     3) Search by Title
@@ -60,7 +78,7 @@ while keep_going:
             else:
                 print("Please input either 'Y' or 'n'.")        
     else:
-        print("*** NOT A VALID CHOICE ***\n")
+        print("\n*** NOT A VALID CHOICE ***")
         
 print("Goodbye!")
     
