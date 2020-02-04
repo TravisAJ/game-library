@@ -7,9 +7,8 @@ import pickle
 '''Database for a Game Library'''
 
 def addedit():
-    #print("running addedit()...")
-    keep_going3 = True
-    while keep_going3:
+    keep_going = True
+    while keep_going:
         print("""
                ADD/EDIT MENU
         ---------------------------
@@ -17,7 +16,7 @@ def addedit():
                    Edit
         ---------------------------
                    Quit
-        """)        
+        """)
         choice = input("Would you like to add/edit? ")
         
         if choice.lower() == "add":
@@ -80,14 +79,82 @@ def addedit():
                     print("\n*** NOT A VALID CHOICE ***") 
                 games[new_key] = new_entry                                                                         
         elif choice.lower() == "edit":
-            pass
+            print("\nChoose a game to edit")
+            print("----------------------")
+            for key in games.keys():
+                print(key, "-", games[key][1])
+                print("----------------------")
+            edit_key = input("")
+            try:
+                edit_key = int(edit_key)
+                edit_entry = games[edit_key]
+                valid = False
+                while not valid:
+                    print("Current genre: ", edit_entry[0])
+                    genre = input("New genre: ")
+                    
+                    print("Current title: ", edit_entry[1])
+                    title = input("New title: ")
+                    
+                    print("Current developer: ", edit_entry[2])
+                    develop = input("New developer: ")
+                    
+                    print("Current publisher: ", edit_entry[3])
+                    publish = input("New publisher: ")
+                    
+                    print("Current system: ", edit_entry[4])
+                    system = input("New system: ")
+                    
+                    print("Current release date: ", edit_entry[5])
+                    release = input("New release date: ")
+                    
+                    print("Current rating: ", edit_entry[6])
+                    rating = input("New rating: ")
+                    
+                    print("Currently ", edit_entry[7])
+                    mode = input("It is now ")
+                    
+                    print("Current price: ", edit_entry[8])
+                    price = input("New price? ")
+                    
+                    print("Current game status: Have you beaten it? ", edit_entry[9])
+                    completion = input("New game status: Have you beaten it? ")
+                    
+                    print("Current purchase date: ", edit_entry[10])
+                    purchase = input("New purchase date: ")
+                    
+                    print("----------------------")
+                    print("Genre: ", genre)
+                    print("Title: ", title)
+                    print("Developer: ", develop)
+                    print("Publisher: ", publish)
+                    print("System: ", system)
+                    print("Release Date: ", release)
+                    print("Rating: ", rating)
+                    print("Single/Multi?: ", mode)
+                    print("Price: ", price)
+                    print("Beat it?: ", completion)
+                    print("Purchase Date: ", purchase)                  
+                    print("----------------------")            
+                    answer = input("Is this Correct? [Y/n] ")
+                    if answer.lower() == "y":
+                        valid = True
+                    elif answer.lower() == "n":
+                        pass
+                    else:
+                        print("\n*** NOT A VALID CHOICE ***")            
+                    games[edit_key] = edit_entry
+            except:
+                if edit_key.lower() == "quit" or edit_key.lower() == "q":
+                    valid = True
+                else:
+                    print("\n*** INVALID INPUT ***")                
         elif choice.lower() == "quit" or choice.lower() == "q":
-            keep_going3 = False
+            keep_going = False
         else:
             print("\n*** NOT A VALID CHOICE ***") 
             
 def printall():
-    #print("running printall()...")
     key_list = games.keys()
     
     for key in key_list:
@@ -113,9 +180,9 @@ def search():
         print("Beat it?: ", games[key][9])
         print("Purchase Date: ", games[key][10])                  
         print("----------------------")        
-    #print("running search()...")
-    keep_going2 = True
-    while keep_going2:
+        
+    keep_going = True
+    while keep_going:
         print("""
                 SEARCH MENU
         ---------------------------
@@ -138,9 +205,9 @@ def search():
             found_one = False         
             genre = input("Insert Genre. ")
             for key in games.keys():
-                if genre in games[key][0]:
+                if genre.lower() in games[key][0]:
                     found_one = True
-                    print_it() == "Quit" or search == "quit"
+                    print_it()
             if not found_one:
                 print("*** NO MATCHES FOUND!***\n")
 
@@ -148,7 +215,7 @@ def search():
             found_one = False         
             title = input("Insert Title. ")
             for key in games.keys():
-                if title in games[key][1]:
+                if title.lower() in games[key][1]:
                     found_one = True
                     print_it()      
             if not found_one:
@@ -158,7 +225,7 @@ def search():
             found_one = False         
             develop = input("Insert Developer. ")
             for key in games.keys():
-                if develop in games[key][2]:
+                if develop.lower() in games[key][2]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -168,7 +235,7 @@ def search():
             found_one = False         
             publish = input("Insert Publisher. ")
             for key in games.keys():
-                if publish in games[key][3]:
+                if publish.lower() in games[key][3]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -176,9 +243,9 @@ def search():
                     
         elif search.lower() == "system":
             found_one = False         
-            system = input("Insert System. ")
+            system = input("loop = FalseInsert System. ")
             for key in games.keys():
-                if system in games[key][4]:
+                if system.lower() in games[key][4]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -188,7 +255,7 @@ def search():
             found_one = False         
             release = input("Insert Release Date. ")
             for key in games.keys():
-                if release in games[key][5]:
+                if release.lower() in games[key][5]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -198,7 +265,7 @@ def search():
             found_one = False         
             rating = input("Insert Rating. ")
             for key in games.keys():
-                if rating in games[key][6]:
+                if rating.lower() in games[key][6]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -208,7 +275,7 @@ def search():
             found_one = False         
             gamemode = input("Is it Singleplayer, Multiplayer, or Either? ")
             for key in games.keys():
-                if gamemode in games[key][7]:
+                if gamemode.lower() in games[key][7]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -218,7 +285,7 @@ def search():
             found_one = False         
             price = input("Insert Price. ")
             for key in games.keys():
-                if price in games[key][8]:
+                if price.lower() in games[key][8]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -228,7 +295,7 @@ def search():
             found_one = False         
             progress = input("Have you beaten the game yet? ")
             for key in games.keys():
-                if progress in games[key][9]:
+                if progress.lower() in games[key][9]:
                     found_one = True
                     print_it()
             if not found_one:
@@ -238,23 +305,50 @@ def search():
             found_one = False         
             purchase = input("Insert Purchase Date. ")
             for key in games.keys():
-                if purchase in games[key][10]:
+                if purchase.lower() in games[key][10]:
                     found_one = True
                     print_it()
             if not found_one:
                 print("*** NO MATCHES FOUND!***\n")                
                     
         elif search.lower() == "quit" or search.lower() == "q":
-            keep_going2 = False
+            keep_going = False
             
         else:
             print("\n*** NOT A VALID CHOICE ***")        
     
 def remove():
-    print("running remove()...") #not done yet
+    loop = True
+    while loop:
+        print("\nChoose a game to remove")
+        print("----------------------")
+        for key in games.keys():
+            print(key, "-", games[key][1])
+            print("----------------------")
+        remove_key = input("")
+        try:
+            remove_key = int(remove_key)
+            confirm = input("Are you sure you want to delete it? [Y/n] ")
+            if confirm.lower() == "y":
+                print("\n", games[remove_key][1], "removed!")
+                for key in games.keys():
+                    if key >= remove_key and key != len(games):
+                        games[key] = games[key + 1]
+                    if key == len(games):
+                        games.pop(key)
+                        loop = False
+                        break
+            elif confirm.lower() == "n":
+                pass
+            else:
+                print("Please input either 'Y' or 'n'.")
+        except:
+            if remove_key.lower() == "quit" or remove_key.lower() == "q":
+                loop = False
+            else:
+                print("\n*** INVALID INPUT ***")
     
 def save():
-    #print("running save()...")
     datafile = open("game_lib.pickle", "wb")
     pickle.dump(games, datafile)
     datafile.close()
@@ -265,15 +359,15 @@ datafile = open("game_lib.pickle", "rb")
 games = pickle.load(datafile)
 datafile.close()
 
-keep_going1 = True
+keep_going = True
 quit = True
 
-while keep_going1:
+while keep_going:
     print("""
     Welcome to the Game Library
     ---------------------------
     
-    MAIN MENU\n
+         MAIN MENU\n
     1) Add/Edit Game
     2) Print All Games
     3) Search Menu
@@ -298,11 +392,11 @@ while keep_going1:
             confirm = input("Are you sure you want to quit? (All unsaved progress will be lost) [Y/n] ")
             if confirm.lower() == "y":
                 quit = False
-                keep_going1 = False
+                keep_going = False
             elif confirm.lower() == "n":
                 quit = False
             else:
-                print("Please input either 'Y' or 'n'.")        
+                print("Please input either 'Y' or 'n'.")
     else:
         print("\n*** NOT A VALID CHOICE ***")
         
